@@ -76,12 +76,13 @@ namespace Project.Scripts.Player
                 if (!combatSystem.Aiming)
                 {
                     var targetRotation = Quaternion.LookRotation(movementDirection);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed
+                        * Time.fixedDeltaTime);
                 }
                 
             }
             
-            rigidbody.MovePosition(rigidbody.position + movementDirection * (movementSpeed * Time.deltaTime));
+            rigidbody.MovePosition(rigidbody.position + movementDirection * (movementSpeed * Time.fixedDeltaTime));
         }
 
         private Vector3 MultipleVectorValues(Vector3 v1, Vector3 v2)

@@ -12,9 +12,9 @@ namespace Project.Scripts
         [SerializeField] private string aimLayerName = "Upper Body Layer";
         [SerializeField] private Transform aimPoint;
         [SerializeField] private float aimRadius = 5;
+        [SerializeField] private float aimMoveSpeed = 2;
         
-
-
+        
         public UnityEvent<bool> onAimToggle;
         
         private bool _aiming;
@@ -55,7 +55,28 @@ namespace Project.Scripts
 
         private void Update()
         {
+            var dir = new Vector3
+            {
+                y = _lookVector.y,
+                x = _lookVector.x,
+                z = _lookVector.x
+            };
             
+            dir.Normalize();
+
+            var curPos = aimPoint.localPosition;
+            curPos += dir * (aimMoveSpeed * Time.deltaTime);
+
+            curPos.x = AimClamp(curPos.x, _initialRelativePos.x);
+            curPos.y = AimClamp(curPos.y, _initialRelativePos.y);
+            curPos.z = AimClamp(curPos.z, _initialRelativePos.z);
+
+            aimPoint.localPosition = curPos;
+        }
+
+        private float AimClamp(float pos, float initial)
+        {
+            return Mathf.Clamp(pos, initial - aimRadius, initial + aimRadius);
         }
 
         private void OnShoot(InputValue val)
