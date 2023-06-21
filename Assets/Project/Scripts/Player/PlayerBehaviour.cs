@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Project.Scripts.Player
@@ -14,6 +13,8 @@ namespace Project.Scripts.Player
         [SerializeField] private new Rigidbody rigidbody;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private ZoneChecker groundChecker;
+        [SerializeField] private CombatSystem combatSystem;
+        
         
         
         
@@ -41,10 +42,6 @@ namespace Project.Scripts.Player
             rigidbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
-        private void OnLook(InputValue value)
-        {
-            Debug.Log(value.Get<Vector2>());
-        }
 
         private bool IsOnGround()
         {
@@ -56,12 +53,13 @@ namespace Project.Scripts.Player
             var forward = _gameCameraTransform.forward;
             forward.y = 0;
             forward.Normalize();
-
+            
             var right = _gameCameraTransform.right;
             right.y = 0;
             right.Normalize();
-
+            
             var movementDirection = forward * _movementVector.y + right * _movementVector.x;
+
             movementDirection.Normalize();
 
             if (movementDirection.magnitude > 0.05f)
@@ -75,11 +73,20 @@ namespace Project.Scripts.Player
             
             if (movementDirection != Vector3.zero)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                if (!combatSystem.Aiming)
+                {
+                    var targetRotation = Quaternion.LookRotation(movementDirection);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                }
+                
             }
             
             rigidbody.MovePosition(rigidbody.position + movementDirection * (movementSpeed * Time.deltaTime));
+        }
+
+        private Vector3 MultipleVectorValues(Vector3 v1, Vector3 v2)
+        {
+            return new Vector3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
         }
     }
 }
