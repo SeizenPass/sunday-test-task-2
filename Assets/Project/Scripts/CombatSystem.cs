@@ -12,7 +12,7 @@ namespace Project.Scripts
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject aimCamera;
         [SerializeField] private string aimLayerName = "Upper Body Layer";
-        [SerializeField] private Transform aimPoint;
+        [SerializeField] private Transform aimPoint, realPoint;
         [SerializeField] private Rig aimRig;
         [SerializeField] private float aimRadius = 5;
         [SerializeField] private float aimMoveSpeed = 2;
@@ -22,6 +22,7 @@ namespace Project.Scripts
         [SerializeField] private Bullet bulletPrefab;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private float bulletSpeed = 100f, shootRate = 0.05f, lifeTime = 5f;
+        [SerializeField] private LayerMask contactLayer;
         
 
         
@@ -54,7 +55,6 @@ namespace Project.Scripts
             onAimToggle.Invoke(_aiming);
             
             aimCamera.SetActive(_aiming);
-            // animator.SetLayerWeight(_aimLayerIndex, _aiming ? 1 : 0);
             _layerChangeTween?.Kill();
             _stanceTween?.Kill();
             if (!_aiming)
@@ -91,12 +91,12 @@ namespace Project.Scripts
             _lastShotTime = Time.time;
 
             var position = spawnPosition.position;
-            var dir = aimPoint.position - position;
+            var dir = realPoint.position - position;
             dir.Normalize();
 
             var bullet = Instantiate(bulletPrefab, position,
                 bulletPrefab.transform.rotation, null);
-            bullet.Setup(bulletSpeed, dir, lifeTime);
+            bullet.Setup(bulletSpeed, dir, lifeTime, contactLayer);
         }
 
         private void Aim()

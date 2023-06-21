@@ -519,7 +519,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156692543}
-  m_LocalRotation: {x: 0.11749625, y: -0.20096457, z: 0.024287203, w: 0.9722232}
+  m_LocalRotation: {x: 0.117496245, y: -0.20096458, z: 0.024287203, w: 0.9722233}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1224,6 +1224,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &696111669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 696111671}
+  - component: {fileID: 696111670}
+  m_Layer: 0
+  m_Name: RealAimCollisionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &696111670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696111669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8fbb3c318f406ea08a972a1e43be8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimCameraTransform: {fileID: 1677662394}
+  targetPoint: {fileID: 759345682}
+  contactLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!4 &696111671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696111669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &702203677
 GameObject:
   m_ObjectHideFlags: 3
@@ -1914,7 +1963,7 @@ GameObject:
   - component: {fileID: 960985916}
   - component: {fileID: 960985915}
   - component: {fileID: 960985914}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2814,7 +2863,7 @@ MonoBehaviour:
     m_SourceObjects:
       m_Length: 1
       m_Item0:
-        transform: {fileID: 759345682}
+        transform: {fileID: 696111671}
         weight: 1
       m_Item1:
         transform: {fileID: 0}
@@ -3054,7 +3103,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894525575}
-  m_LocalRotation: {x: 0.11749625, y: -0.20096454, z: 0.0242872, w: 0.9722233}
+  m_LocalRotation: {x: 0.11749626, y: -0.20096458, z: 0.024287209, w: 0.9722232}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3305,6 +3354,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 13.52
       objectReference: {fileID: 0}
+    - target: {fileID: 840157436, guid: 21a02d73a6dbcff45bd4f55561df7661, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 696111671}
     - target: {fileID: 1263634546, guid: 21a02d73a6dbcff45bd4f55561df7661, type: 3}
       propertyPath: m_Weight
       value: 0
@@ -3419,7 +3472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 661881077204507365, guid: 21a02d73a6dbcff45bd4f55561df7661, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4978076935932963502, guid: 21a02d73a6dbcff45bd4f55561df7661, type: 3}
       propertyPath: m_Name
@@ -3437,6 +3490,10 @@ PrefabInstance:
       propertyPath: aimRadius
       value: 10.26
       objectReference: {fileID: 0}
+    - target: {fileID: 7698040992108550027, guid: 21a02d73a6dbcff45bd4f55561df7661, type: 3}
+      propertyPath: realPoint
+      value: 
+      objectReference: {fileID: 696111671}
     - target: {fileID: 7698040992108550027, guid: 21a02d73a6dbcff45bd4f55561df7661, type: 3}
       propertyPath: shootRate
       value: 0.1
@@ -3457,6 +3514,10 @@ PrefabInstance:
       propertyPath: spawnPosition
       value: 
       objectReference: {fileID: 335178278}
+    - target: {fileID: 7698040992108550027, guid: 21a02d73a6dbcff45bd4f55561df7661, type: 3}
+      propertyPath: contactLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7698040992108550027, guid: 21a02d73a6dbcff45bd4f55561df7661, type: 3}
       propertyPath: onAimToggle.m_PersistentCalls.m_Calls.Array.size
       value: 4
