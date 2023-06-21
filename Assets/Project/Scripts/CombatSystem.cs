@@ -1,5 +1,5 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
+using Project.Scripts.Player;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
@@ -18,12 +18,20 @@ namespace Project.Scripts
         [SerializeField] private float aimMoveSpeed = 2;
         [SerializeField] private float stanceChangeTime = 0.5f;
         
+        [Header("Shooting")] 
+        [SerializeField] private Bullet bulletPrefab;
+        [SerializeField] private Transform spawnPosition;
+        [SerializeField] private float bulletSpeed = 100f, shootRate = 0.05f, lifeTime = 5f;
         
+
         
+
+
         public UnityEvent<bool> onAimToggle;
-        
-        private bool _aiming;
+
+        private bool _aiming, _shooting;
         private int _aimLayerIndex;
+        private float _lastShotTime;
 
         private Vector2 _lookVector;
         private Tween _layerChangeTween, _stanceTween;
@@ -73,6 +81,26 @@ namespace Project.Scripts
 
         private void Update()
         {
+            if (_aiming) Aim();
+            if (_shooting) Shoot();
+        }
+
+        private void Shoot()
+        {
+            if (_lastShotTime + shootRate > Time.time) return;
+            _lastShotTime = Time.time;
+
+            var position = spawnPosition.position;
+            var dir = aimPoint.position - position;
+            dir.Normalize();
+
+            var bullet = Instantiate(bulletPrefab, position,
+                bulletPrefab.transform.rotation, null);
+            bullet.Setup(bulletSpeed, dir, lifeTime);
+        }
+
+        private void Aim()
+        {
             var dir = new Vector3
             {
                 y = _lookVector.y,
@@ -99,7 +127,7 @@ namespace Project.Scripts
 
         private void OnShoot(InputValue val)
         {
-            Debug.Log(val.isPressed);
+            _shooting = val.isPressed;
         }
 
         private void OnDrawGizmosSelected()
