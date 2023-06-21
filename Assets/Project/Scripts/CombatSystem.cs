@@ -21,7 +21,7 @@ namespace Project.Scripts
         private int _aimLayerIndex;
 
         private Vector2 _lookVector;
-
+        
         private Vector3 _initialRelativePos;
 
         public bool Aiming => _aiming;
