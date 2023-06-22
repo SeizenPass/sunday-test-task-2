@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Footstep Collection
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: 8a2120522fc492044acc78c43191e5a8, type: 3}
-  - {fileID: 8300000, guid: 58379b0f2e2ce094a9fb899f23893d89, type: 3}
-  - {fileID: 8300000, guid: f745f39b573ebfd4a86967c76db3f290, type: 3}
-  - {fileID: 8300000, guid: 8024a786ecc7e2643991969ad1195004, type: 3}
-  - {fileID: 8300000, guid: f6f0a441514d01f439c44449c5b309ff, type: 3}
+  - {fileID: 8300000, guid: f32e3a22493d73d468d5ab7ec0350265, type: 3}
+  - {fileID: 8300000, guid: aafbf63d8a7f33a4cac4d9670c9a9144, type: 3}
+  - {fileID: 8300000, guid: be30d73db0c46564f90746ee8cd54490, type: 3}
+  - {fileID: 8300000, guid: 344e24e63527ee647ae6df693fd50211, type: 3}
