@@ -21,15 +21,10 @@ namespace Project.Scripts
         
         [Header("Shooting")] 
         [SerializeField] private ObjectPool bulletPool;
-        [SerializeField] private Bullet bulletPrefab;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private float bulletSpeed = 100f, shootRate = 0.05f, lifeTime = 5f;
         [SerializeField] private LayerMask contactLayer;
         
-
-        
-
-
         public UnityEvent<bool> onAimToggle;
 
         private bool _aiming, _shooting;
@@ -39,6 +34,7 @@ namespace Project.Scripts
         private Vector2 _lookVector;
         private Tween _layerChangeTween, _stanceTween;
         private Vector3 _initialRelativePos;
+        private static readonly int Shooting = Animator.StringToHash("Shooting");
 
         public bool Aiming => _aiming;
 
@@ -96,9 +92,6 @@ namespace Project.Scripts
             var dir = realPoint.position - position;
             dir.Normalize();
 
-            // var bullet = Instantiate(bulletPrefab, position,
-            //     bulletPrefab.transform.rotation, null);
-
             var poolObj = bulletPool.GetPooledObject();
             if (!poolObj) return;
 
@@ -136,6 +129,7 @@ namespace Project.Scripts
         private void OnShoot(InputValue val)
         {
             _shooting = val.isPressed;
+            animator.SetBool(Shooting, _shooting);
         }
 
         private void OnDrawGizmosSelected()
