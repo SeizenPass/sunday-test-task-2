@@ -1,7 +1,5 @@
-﻿using System;
-using Cinemachine;
+﻿using Cinemachine;
 using DG.Tweening;
-using Project.Scripts.Player;
 using Project.Scripts.Pool;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -30,6 +28,7 @@ namespace Project.Scripts
         [SerializeField] private LayerMask contactLayer;
         
         public UnityEvent<bool> onAimToggle;
+        public UnityEvent onShoot;
 
         private bool _aiming, _shooting;
         private int _aimLayerIndex;
@@ -104,6 +103,7 @@ namespace Project.Scripts
             bullet.Setup(bulletSpeed, dir, lifeTime, contactLayer, spawnPosition.position);
             
             impulseSource.GenerateImpulse(Random.Range(0.1f, 1f));
+            onShoot.Invoke();
         }
 
         private void Aim()

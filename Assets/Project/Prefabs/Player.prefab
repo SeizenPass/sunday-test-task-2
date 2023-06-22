@@ -3406,6 +3406,7 @@ GameObject:
   - component: {fileID: 7698040992108550029}
   - component: {fileID: 7698040992108550037}
   - component: {fileID: 913367363297128832}
+  - component: {fileID: 7698040992108550039}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3638,6 +3639,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7698040992108550039}
+        m_TargetAssemblyTypeName: Project.Scripts.Audio.AudioPlayerCommunicator,
+          Assembly-CSharp
+        m_MethodName: PlayEffect
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 5f8ddf1c40f19a445ae3a13c21c07931, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7698040992108550028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3808,6 +3825,18 @@ MonoBehaviour:
   footPrintPool: {fileID: 0}
   player: {fileID: 8308850224467515581}
   lifetime: 6
+--- !u!114 &7698040992108550039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4978076935932963502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a029eae0ff49f58751495c3c3e6792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4984385683612262091
 GameObject:
   m_ObjectHideFlags: 0
