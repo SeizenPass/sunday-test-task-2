@@ -48,6 +48,12 @@ namespace Project.Scripts
             aimCamera.SetActive(_aiming);
             _aimLayerIndex = animator.GetLayerIndex(aimLayerName);
         }
+        
+        private void Update()
+        {
+            if (_aiming) Aim();
+            if (_shooting) Shoot();
+        }
 
         private void OnToggleAim(InputValue value)
         {
@@ -79,12 +85,7 @@ namespace Project.Scripts
         {
             _lookVector = value.Get<Vector2>();
         }
-
-        private void Update()
-        {
-            if (_aiming) Aim();
-            if (_shooting) Shoot();
-        }
+        
 
         private void Shoot()
         {

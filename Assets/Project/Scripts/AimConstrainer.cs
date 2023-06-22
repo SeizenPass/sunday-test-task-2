@@ -8,8 +8,6 @@ namespace Project.Scripts
         [SerializeField] private Transform aimCameraTransform;
         [SerializeField] private Transform targetPoint;
         [SerializeField] private LayerMask contactLayer;
-        
-        
 
         private void Update()
         {
