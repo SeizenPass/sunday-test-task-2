@@ -8,7 +8,7 @@
 
 Мой код (не ассетовый) находится в папке **Assets/Project/Scripts**.
 
-Showcase:
+Showcase (гифки, возможно грузятся долго):
 
 ![Alt Text](Showcase/movement_show.gif)
 ![Alt Text](Showcase/jump_show.gif)
