@@ -1,10 +1,13 @@
-﻿using DG.Tweening;
+﻿using System;
+using Cinemachine;
+using DG.Tweening;
 using Project.Scripts.Player;
 using Project.Scripts.Pool;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace Project.Scripts
 {
@@ -19,8 +22,9 @@ namespace Project.Scripts
         [SerializeField] private float aimMoveSpeed = 2;
         [SerializeField] private float stanceChangeTime = 0.5f;
         
-        [Header("Shooting")] 
+        [Header("Shooting")]
         [SerializeField] private ObjectPool bulletPool;
+        [SerializeField] private CinemachineImpulseSource impulseSource;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private float bulletSpeed = 100f, shootRate = 0.05f, lifeTime = 5f;
         [SerializeField] private LayerMask contactLayer;
@@ -98,6 +102,8 @@ namespace Project.Scripts
             var bullet = poolObj.GetComponent<Bullet>();
             
             bullet.Setup(bulletSpeed, dir, lifeTime, contactLayer, spawnPosition.position);
+            
+            impulseSource.GenerateImpulse(Random.Range(0.1f, 1f));
         }
 
         private void Aim()
