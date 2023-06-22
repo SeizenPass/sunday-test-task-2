@@ -2,7 +2,7 @@
 using Project.Scripts.Utils;
 using UnityEngine;
 
-namespace Project.Scripts.Player
+namespace Project.Scripts
 {
     public class Bullet : MonoBehaviour
     {
@@ -18,15 +18,20 @@ namespace Project.Scripts.Player
 
         private bool _dead;
 
-        public void Setup(float speed, Vector3 direction, float lifetime, LayerMask contactLayer)
+        public void Setup(float speed, Vector3 direction, float lifetime, LayerMask contactLayer, Vector3 pos)
         {
             _speed = speed;
             _direction = direction;
             _lifetime = lifetime;
             _activatedAt = Time.time;
             _contactLayer = contactLayer;
+            _dead = false;
+            transform.position = pos;
+            meshRenderer.enabled = true;
+            particle.gameObject.SetActive(true);
             
             _set = true;
+            gameObject.SetActive(true);
         }
 
         private void FixedUpdate()
@@ -37,7 +42,6 @@ namespace Project.Scripts.Player
                 Death();
             }
             
-            // transform.position += _direction * (_speed * Time.deltaTime);
             rigidbody.MovePosition(rigidbody.position + _direction * (_speed * Time.fixedDeltaTime));
         }
 
@@ -63,9 +67,11 @@ namespace Project.Scripts.Player
 
         private IEnumerator LastWait()
         {
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(1f);
+
+            _set = false;
             
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

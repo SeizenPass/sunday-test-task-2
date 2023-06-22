@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Project.Scripts.Player;
+using Project.Scripts.Pool;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
@@ -19,6 +20,7 @@ namespace Project.Scripts
         [SerializeField] private float stanceChangeTime = 0.5f;
         
         [Header("Shooting")] 
+        [SerializeField] private ObjectPool bulletPool;
         [SerializeField] private Bullet bulletPrefab;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private float bulletSpeed = 100f, shootRate = 0.05f, lifeTime = 5f;
@@ -94,9 +96,15 @@ namespace Project.Scripts
             var dir = realPoint.position - position;
             dir.Normalize();
 
-            var bullet = Instantiate(bulletPrefab, position,
-                bulletPrefab.transform.rotation, null);
-            bullet.Setup(bulletSpeed, dir, lifeTime, contactLayer);
+            // var bullet = Instantiate(bulletPrefab, position,
+            //     bulletPrefab.transform.rotation, null);
+
+            var poolObj = bulletPool.GetPooledObject();
+            if (!poolObj) return;
+
+            var bullet = poolObj.GetComponent<Bullet>();
+            
+            bullet.Setup(bulletSpeed, dir, lifeTime, contactLayer, spawnPosition.position);
         }
 
         private void Aim()
